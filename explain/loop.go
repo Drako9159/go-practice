@@ -7,3 +7,30 @@ for i, v := range arr {
 }
 
 // Range is for slices, arrays, maps and strings
+
+// Maps
+
+type Person struct {
+	DNI, Name, string
+}
+
+var m = map[string]Person{
+	"12345": {"12345", "Master"},
+	"12346": {"12346", "Dev"}
+}
+
+func main() {
+	fmt.Println(m["12345"])
+	m["12345"] = Person["12345", "New Master"]
+}
+
+// Functions
+
+func Hello(name string) string{
+	fmt.Println("Hello", name)
+}
+
+func main2() {
+	message := Hello("Lucy")
+	fmt.Println(message)
+}
