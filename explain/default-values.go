@@ -1,6 +1,3 @@
-
-
-
 // Default values
 
 bool: false

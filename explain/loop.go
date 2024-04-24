@@ -24,13 +24,5 @@ func main() {
 	m["12345"] = Person["12345", "New Master"]
 }
 
-// Functions
 
-func Hello(name string) string{
-	fmt.Println("Hello", name)
-}
 
-func main2() {
-	message := Hello("Lucy")
-	fmt.Println(message)
-}
