@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 	"io"
+	"os"
 )
 
 // b stream channel // data stream
@@ -32,14 +33,14 @@ type rot13Reader struct {
 }
 
 func (rr *rot13Reader) Read(p []byte) (n int, err error){
-	n, err := rr.r.Read(p)
+	n, err = rr.r.Read(p)
 
 	for i := 0; i < len(p); i++ {
 		if p[i] >= "A" && p[i] <= "Z" || p[i] >= "a" && p[i] <= "z" {
-			if p[i] >= "Z"-13 {
+			if p[i] <= "Z" {
 				p[i] = (p[i]-"A"+13)%26 + "A"
 			} else {
-				p[i] = (p[i]-"a"-13)%26 + "a"
+				p[i] = (p[i]-"a"+13)%26 + "a"
 			}
 		}
 	}
@@ -47,5 +48,8 @@ func (rr *rot13Reader) Read(p []byte) (n int, err error){
 }
 
 func main() {
-
+	s := strings.NewReader("Lbh penpxrp gur phqr!")
+	r := rot13Reader{s}
+	io.Copy(os.Stdout, &r) // You cracked the code!
 }
+
