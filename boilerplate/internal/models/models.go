@@ -87,4 +87,3 @@ fmt.Println(*p) // 42
 *p = 21
 fmt.Println(*p) // 21
 
-

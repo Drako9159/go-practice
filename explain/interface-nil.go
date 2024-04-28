@@ -112,7 +112,6 @@ func main3() {
 			case Number: fmt.Println(value)
 			default: fmt.Println("I don´ known")
 		}
-
 		greeter.Hello()
 	}
 }
