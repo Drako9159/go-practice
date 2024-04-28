@@ -145,23 +145,53 @@ type TreeNode struct {
 // Verify if two trees are the same
 // Concurrent Traversal of two trees is the same sequence in the tree traversal order
 
+
+// MUTEX
+// Block the execution of a function until the mutex is unlocked
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+type SequenceCollector struct {
+	sequence map[int]bool
+	mutex    sync.Mutex
+}
+
+/// Implementation MUTEX
+
 func isSameSequence(root1, root2 *TreeNode) bool {
-	seq1 := make(map[int]bool)
-	seq2 := make(map[int]bool)
+	seq1 := &SequenceCollector{sequence: make(map[int]bool)}
+	seq2 := &SequenceCollector{sequence: make(map[int]bool)}
 
-	transverse(root1, seq1)
-	transverse(root2, seq2)
-	
-	return equal(seq1, seq2)
+	// Concurrent Traversal, synchronizing two trees and create wait group 
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go func() {
+		defer wg.Done()
+		transverse(root1, seq1)
+	}()
+	go func() {
+		defer wg.Done()
+		transverse(root2, seq2)
+	}()
+	// wg.Wait()
 
+	// Compare two sequences
+	return equal(seq1.sequence, seq2.sequence)
 }
 
 
-func transverse(node *TreeNode, seq map[int]bool) {
+func transverse(node *TreeNode, seq *SequenceCollector) {
 	if node == nil {
 		return
 	}
-	seq[node.Val] = true
+	
+	seq.mutex.Lock()
+	seq.sequence[node.Val] = true
+	seq.mutex.Unlock()
 
 	transverse(node.Left, seq)
 	transverse(node.Right, seq)
@@ -227,3 +257,5 @@ func main() {
 	fmt.Println(isSameSequence(root1, root2)) // true // because they are the same sequence in the tree traversal order of root1 and root2 both are 3, 1, 1, 2, 8, 5, 13 in the same order	
 
 }
+
+
