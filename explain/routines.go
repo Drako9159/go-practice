@@ -97,3 +97,36 @@ func main() {
 
 	fmt.Println("Goodbye")
 }
+
+// Select
+
+func say(s string, ch chan string) {
+	for i := 0; i < 3; i++ {
+		fmt.Println(s)
+		ch <- s
+	}
+	close(ch)
+}
+
+func main() {
+	ch := make(chan string)
+	go say("Hello", ch)
+
+	for {
+		select {
+		case msg, ok := <-ch:
+			if !ok {
+				fmt.Println("Channel closed")
+				break
+			}
+			fmt.Println("Received: ", msg)
+
+		case <-time.After(1 * time.Second): // timeout in 1 second time
+			fmt.Println("Timeout in 1 second")
+			break
+
+
+		default:
+			fmt.Println("Nothing received")
+		}
+	}
