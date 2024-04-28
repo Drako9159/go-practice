@@ -65,3 +65,35 @@ func main(){
 
 // Range and close
 
+v, ok := <-ch
+// ok is false if channel is closed, and true if channel is not closed
+
+for i := range ch {
+	// do something
+}
+
+// close channel is not necessary, it will be closed automatically
+// when the loop ends or the channel is closed
+
+func say(s string, ch chan string) {
+	for i := 0; i < 5; i++ {
+		fmt.Println(s)
+		ch <- s
+	}
+	close(ch)
+}
+
+func main() {
+	ch := make(chan string)
+	go say("Hello", ch)
+
+	for {
+		msg, ok := <-ch
+		if !ok {
+			break
+		}
+		fmt.Println("Received: ", msg)
+	}
+
+	fmt.Println("Goodbye")
+}
