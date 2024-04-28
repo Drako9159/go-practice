@@ -130,3 +130,100 @@ func main() {
 			fmt.Println("Nothing received")
 		}
 	}
+	fmt.Println("Goodbye")
+}
+
+// TreeNode Traversals example
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+// Tree Traversal
+// Verify if two trees are the same
+// Concurrent Traversal of two trees is the same sequence in the tree traversal order
+
+func isSameSequence(root1, root2 *TreeNode) bool {
+	seq1 := make(map[int]bool)
+	seq2 := make(map[int]bool)
+
+	transverse(root1, seq1)
+	transverse(root2, seq2)
+	
+	return equal(seq1, seq2)
+
+}
+
+
+func transverse(node *TreeNode, seq map[int]bool) {
+	if node == nil {
+		return
+	}
+	seq[node.Val] = true
+
+	transverse(node.Left, seq)
+	transverse(node.Right, seq)
+}
+
+func equal(seq1, seq2 map[int]bool) bool {
+	if len(seq1) != len(seq2) {
+		return false
+	}
+	for val := range seq1 {
+		if !seq2[val] {
+			return false
+		}
+	}
+	return true
+}
+
+func main() {
+	root1 := &TreeNode{
+		Val: 3,
+		Left: &TreeNode{
+			Val: 1,
+			Left: &TreeNode{
+				Val: 1,
+			},
+			Right: &TreeNode{
+				Val: 2,
+			}
+		},
+		Right : &TreeNode{
+			Val: 8,
+			Left: &TreeNode{
+				Val: 5
+			},
+			Right: &TreeNode{
+				Val: 13
+			}
+		}
+	}
+
+	root2 := &TreeNode{
+		Val: 8,
+		Left: &TreeNode{
+			Val: 3,
+			Left: &TreeNode{
+				Val: 1,
+				Left: &TreeNode{
+					Val: 1,
+				},
+				Right: &TreeNode{
+					Val: 2
+				}
+			},
+			Right: &TreeNode{
+				Val: 5,
+			}
+		},
+		Right : &TreeNode{
+			Val: 13
+		}
+	}
+
+	fmt.Println(isSameSequence(root1, root2)) // true // because they are the same sequence in the tree traversal order of root1 and root2 both are 3, 1, 1, 2, 8, 5, 13 in the same order	
+
+}
