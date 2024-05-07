@@ -17,5 +17,11 @@ func MainView(w http.ResponseWriter, r *http.Request) {
 		"ui/html/pages/main/main.tmpl.html",
 	}
 
-	// 54
+	ts, err := template.ParseFiles(for...)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		fmt.Println("Error parsing template files: ", err)
+	}
+
+	err = ts.Execute(w, "base", {})
 }
