@@ -1,0 +1,3 @@
+
+execute comand
+go run ./cmd/web

@@ -23,3 +23,9 @@ func ParseTemplateFiles(w http.ResponseWriter, templateName string, context any,
 		return
 	}
 }
+
+func TransformToTemplateFuncMap(key string, f interface{}) template.FuncMap {
+	return template.FuncMap{
+		key: f,
+	}
+}
