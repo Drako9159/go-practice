@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"GoBaby/internals/utils"
 	"GoBaby/internals/models"
-	
+	"html/template"
 )
 
 
@@ -17,11 +17,15 @@ func MainView(w http.ResponseWriter, r *http.Request) {
 		"ui/html/pages/main/main.tmpl.html",
 	}
 
-	ts, err := template.ParseFiles(for...)
-	if err != nil {
+	ts, er := template.ParseFiles(for...)
+	if er != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		fmt.Println("Error parsing template files: ", err)
+		fmt.Println("Error parsing template files: ", er)
 	}
 
-	err = ts.Execute(w, "base", {})
+	err = ts.Execute(w, "base", utils.EmptyStruct)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		fmt.Println("Error executing template: ", err)
+	}
 }

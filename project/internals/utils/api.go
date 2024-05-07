@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"net/http"
+	"html/template"
 )
 
 func CheckIfPath(w http.ResponseWriter, r *http.Request, path string) {
@@ -21,3 +22,10 @@ func IsValidHTTPMethod(method string, acceptedMethod string, w http.ResponseWrit
 	http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	return false
 }
+
+var (
+	EmptyFuncMap = template.FuncMap{}
+	EmptyStruct = struct{}{}
+)
+
+
