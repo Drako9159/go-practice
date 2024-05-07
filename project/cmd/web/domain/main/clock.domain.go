@@ -4,9 +4,6 @@ import (
 	"net/http"
 	"GoBaby/internals/models"
 	"GoBaby/internals/utils"
-	"fmt"
-	"html/template"
-	"GoBaby/cmd/web/routes"
 )
 
 func ClockFragment(w http.ResponseWriter, r *http.Request) {
