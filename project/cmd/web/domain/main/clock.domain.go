@@ -8,7 +8,5 @@ import (
 
 func ClockFragment(w http.ResponseWriter, r *http.Request) {
 	utils.CheckIfPath(w, r, models.RoutesInstance.CLOCK)
-
 	utils.ParseTemplateFiles(w, "clock", utils.EmptyStruct, utils.EmptyFuncMap, "ui/html/pages/main/clock.tmlp.html")
-
 }
