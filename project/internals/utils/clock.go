@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 )
 
 
@@ -70,16 +71,17 @@ func StartCountdown(clock *Clock, duration int){
 	ticker := time.NewTicker(1 * time.Second)
 
 	for range ticker.C {
-		clock.CountDown = FormatDuration(duration - currentDuration)
+		clock.CountDown = FormatDuration(currentDuration)
 		currentDuration--
 		if currentDuration < 0 {
 			currentDuration = duration
 		}
 		select {
 			case <-clock.Stop:
+				clock.running = false
 				return
 			default:
-				fmt.Println(clock.CountDown)
+				//fmt.Println(clock.CountDown)
 		}
 	}
 }

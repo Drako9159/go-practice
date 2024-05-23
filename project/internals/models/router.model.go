@@ -15,7 +15,7 @@ var RoutesInstance = Routes{
 	MAIN: "/",
 	LOGS: "/logs",
 	CLOCK: "/clock",
-	RESTART_CYCLE: "/restart-cycle",
+	RESTART_CYCLE: "/clock/restart-cycle",
 	LOG_TABLE: "/log-table",
 	ERROR: "/error",
 	CLEAR_ERROR: "/clear-error",

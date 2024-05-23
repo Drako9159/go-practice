@@ -4,6 +4,6 @@
 <div id="clock" hx-get="/clock" hx-trigger="load, every 1s"></div>
 <a href="/logs" class="link"><button id="logButton" class="action-button">Log</button></a>
 
-<button id="restartButton" class="action-button">Restart Cycle</button>
+<button id="restartButton" class="action-button" hx-post="/clock/restart-cycle">Restart Cycle</button>
 
 {{end}}
