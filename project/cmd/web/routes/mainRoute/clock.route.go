@@ -8,5 +8,10 @@ import (
 
 
 func ClockRender(){
-	 routes.GetMuxInstance().HandleFunc("GET "+models.RoutesInstance.CLOCK, mainDomain.ClockFragment)
+	duration := mainDomain.GetDuration()
+	clock := mainDomain.GetClockInstance()
+
+	utils.SetDuration(duration)
+
+	routes.GetMuxInstance().HandleFunc("GET "+models.RoutesInstance.CLOCK, mainDomain.ClockFragment)
 }

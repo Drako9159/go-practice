@@ -55,3 +55,35 @@ func NewClock() *Clock {
 		mu: sync.Mutex{},
 	}
 }
+
+func StartCountdown(clock *Clock, duration int){
+	clock.mu.Lock()
+	defer clock.mu.Unlock()
+
+	if clock.running {
+		fmt.Println("Clock is already running")
+		return
+	}
+
+	clock.running = true
+    
+	ticker := time.NewTicker(1 * time.Second)
+
+	for range ticker.C {
+		clock.CountDown = FormatDuration(duration - currentDuration)
+		currentDuration--
+		if currentDuration < 0 {
+			currentDuration = duration
+		}
+		select {
+			case <-clock.Stop:
+				return
+			default:
+				fmt.Println(clock.CountDown)
+		}
+	}
+}
+
+func StopCountdown(clock *Clock) {
+	clock.Stop <- struct{}{}
+}
