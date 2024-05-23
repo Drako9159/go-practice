@@ -1,5 +1,13 @@
 package utils
 
+import (
+	"fmt"
+	"strconv"
+	"strings"
+	"sync"
+)
+
+
 type Clock struct {
 	Stop chan struct{}
 	CountDown string
@@ -38,4 +46,12 @@ func FormatDuration(seconds int) string {
 	minutes := (seconds % 3600) / 60
 	seconds = seconds % 60
 	return fmt.Sprintf("%02d:%02d:%02d", hours, minutes, seconds)
+}
+
+func NewClock() *Clock {
+	return &Clock{
+		Stop: make(chan struct{}, 1),
+		CountDown: "04:00:00",
+		mu: sync.Mutex{},
+	}
 }

@@ -1,7 +1,7 @@
 {{define "main"}}
 
 <h1 class="title pulsing"><span>Go Baby!</span></h1>
-<div id="clock"></div>
+<div id="clock" hx-get="/clock" hx-trigger="load, every 1s"></div>
 <a href="/logs" class="link"><button id="logButton" class="action-button">Log</button></a>
 
 <button id="restartButton" class="action-button">Restart Cycle</button>
