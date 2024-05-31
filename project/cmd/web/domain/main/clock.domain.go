@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"GoBaby/internals/models"
 	"GoBaby/internals/utils"
+	"GoBaby/ui"
 )
 
 var duration = 14400
@@ -20,7 +21,7 @@ func GetDuration() int {
 
 func ClockFragment(w http.ResponseWriter, r *http.Request) {
 	utils.CheckIfPath(w, r, models.RoutesInstance.CLOCK)
-	utils.ParseTemplateFiles(w, "clock", clockInstance, utils.EmptyFuncMap, "ui/html/pages/main/clock.tmpl.html")
+	utils.ParseTemplateFiles(w, "clock", clockInstance, utils.EmptyFuncMap, ui.Content, "html/pages/main/clock.tmpl.html")
 }
 
 func RestartCycle(w http.ResponseWriter, r *http.Request) {
