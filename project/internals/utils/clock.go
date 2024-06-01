@@ -49,6 +49,11 @@ func FormatDuration(seconds int) string {
 	return fmt.Sprintf("%02d:%02d:%02d", hours, minutes, seconds)
 }
 
+func FormatPrimitiveDate(dateTime primitive.DateTime) string {
+	date := time.Unix(0, int64(dateTime) * int64(time.Millisecond))
+	return date.Format("2006-01-02")
+}
+
 func NewClock() *Clock {
 	return &Clock{
 		Stop: make(chan struct{}, 1),

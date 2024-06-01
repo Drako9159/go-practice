@@ -2,3 +2,6 @@
 
 execute comand
 go run ./cmd/web
+
+// install mongo go driver
+go get go.mongodb.org/mongo-driver/mongo

@@ -6,7 +6,6 @@ import (
 	"GoBaby/ui"
 )
 
-
 var (
 	mux = http.NewServeMux()
 	fileServer http.Handler
