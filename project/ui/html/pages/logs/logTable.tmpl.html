@@ -1,0 +1,17 @@
+{{ define "logTable" }}
+
+<thead>
+    <th>Date</th>
+    <th>Duration</th>
+</thead>
+
+<tbody>
+    {{ range . }}
+    <tr>
+        <td>{{ .FormatPrimitiveDateTime .Date }}</td>
+        <td>{{ .FormatDuration .Duration }}</td>
+    </tr>
+</tbody>
+
+
+{{ end }} {{ end }}
