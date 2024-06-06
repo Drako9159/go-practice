@@ -14,6 +14,13 @@ func InitRoutes() {
 	mainRoute.ClockRender()
 }
 
+func InitDb(){
+	_, initDbError := db_config.InitializeDb()
+	if initDbError != nil {
+		slog.Log(context.TODO(), slog.LevelError, initDbError.String())
+	}
+}
+
 func main() {
 	InitRoutes()
 
