@@ -33,3 +33,16 @@ func GetUserByUUID(uuid string) (*models.User, *models.AppError) {
 
 	return result, error
 }
+
+
+func SetUser(user models.User) *models.AppError {
+	_, error := db_config.UserCollection.InsertOne(context.TODO(), user)
+	return error
+}
+
+
+func AddLogByUUID(uuid int, log models.Log) *models.AppError {
+	_, error := db_config.UserCollection.UpdateOne(context.TODO(), bson.D{{Key: "_id", Value: uuid}}, bson.D{{Key: "$push", Value: bson.D{{Key: "logs", Value: log}}}})
+
+	return error
+}
