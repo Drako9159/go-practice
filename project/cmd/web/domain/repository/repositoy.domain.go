@@ -11,11 +11,11 @@ func InitializeDb() (*mongo.Client, *models.AppError) {
 	return db_config.InitializeDb()
 }
 
-func GerUserByUUID(uuid int) (*models.User, *models.AppError) {
+func GetUserByUUID(uuid int) (models.User, *models.AppError) {
 	return repository_adapters.GetUserByUUID(uuid)
 }
 
-func SetUser(user models.User) *models.AppError {
+func SetUser(user *models.User) *models.AppError {
 	return repository_adapters.SetUser(user)
 }
 

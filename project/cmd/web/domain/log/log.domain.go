@@ -5,17 +5,14 @@ import (
 	"GoBaby/internals/utils"
 	"net/http"
 	"GoBaby/ui"
-	"GoBaby/cmd/web/domain/repository/repository_domain"
 	"context"
 	"time"
-
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	slog "GoBaby/cmd/web/domain/log"
-
-	
+	repository_domain "GoBaby/cmd/web/domain/repository"
+	"log/slog"
 )
 
-type LogViewModel static {
+type LogViewModel struct {
 	Logs []models.Log
 }
 
@@ -33,13 +30,13 @@ func LogView(w http.ResponseWriter, r *http.Request) {
 func LogTable(w http.ResponseWriter, r *http.Request) {
 	utils.CheckIfPath(w, r, models.RoutesInstance.LOG_TABLE)
 
-	users, err := repository_domain.GetUserByUUID(0)
+	users, err := repository_domain.GetUserByUUID(0) 
 	if err != nil {
 		slog.Log(context.TODO(), slog.LevelError, err.Message)
 		return
 	}
 
-	utils.ParseTemplateFiles(w, "logTable", users.Log, utils.EmptyFuncMap, ui.Content, "html/pages/logs/logTable.tmpl.html")
+	utils.ParseTemplateFiles(w, "logTable", users.Logs, utils.EmptyFuncMap, ui.Content, "html/pages/logs/logTable.tmpl.html")
 }
 
 

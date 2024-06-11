@@ -4,16 +4,16 @@ import (
 	"GoBaby/internals/models"
 	"go.mongodb.org/mongo-driver/bson"
 	db_config "GoBaby/cmd/web/domain/repository/config"
-	
+	"context"
 )
 
-func GetUserByUUID(uuid string) (*models.User, *models.AppError) {
+func GetUserByUUID(uuid int) (models.User, *models.AppError) {
 	filter := bson.D{
 		{
 			Key: "$and", Value: bson.A{
 				bson.D{
-					{Key: "_id", Value: uuid}
-				}.
+					{Key: "_id", Value: uuid},
+				},
 			},
 		},
 	}
@@ -28,14 +28,13 @@ func GetUserByUUID(uuid string) (*models.User, *models.AppError) {
 			Err:     err,
 			Code:    500,
 		}
-		// return nil, error
 	}
 
 	return result, error
 }
 
 
-func SetUser(user models.User) *models.AppError {
+func SetUser(user *models.User) *models.AppError {
 	_, err := db_config.UserCollection.InsertOne(context.TODO(), user)
 	if err != nil {
 		return &models.AppError{

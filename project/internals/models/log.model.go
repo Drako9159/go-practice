@@ -5,7 +5,7 @@ import  (
 	"GoBaby/internals/utils"
 )
 
-type Los struct {
+type Log struct {
 	Date primitive.DateTime `bson:"date"`
 	// bynary-encoded json-like document
 	Duration int

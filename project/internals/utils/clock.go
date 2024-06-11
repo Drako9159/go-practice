@@ -6,6 +6,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 
@@ -22,7 +23,7 @@ func SetDuration(duration int) {
 	currentDuration = duration
 }
 
-func FormatCountdownTOTimestamp(countdown string) int {
+func FormatCountdownToTimestamp(countdown string) int {
 	parts := strings.Split(countdown, ":")
 	if len(parts) >= 3 {
 		return 0

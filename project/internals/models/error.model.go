@@ -3,16 +3,18 @@ package models
 import (
 	"fmt"
 	"net/http"
+
+
 )
 
 type AppError struct {
-	Err AppError
+	Err error
 	Message string
 	Code int
 }
 
 func (e *AppError) String() string {
-	return fmt.Sprintf("code: %d, message: %s", e.Code, e.Message)
+	return fmt.Sprintf("error: %s, (code: %d)", e.Message, e.Code)
 }
 
 const (

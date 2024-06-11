@@ -1,12 +1,20 @@
 package db_config
 
-import "go.mongodb.org/mongo-driver/mongo"
+import (
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/bson"
+	"context"
+	"GoBaby/internals/models"
+	"log/slog"
+)
 
 var dataBase = "GoBaby"
 var collections = map[string]string{
-	"users": "users"
-	"logs": "logs"
+	"users": "users",
+	"logs": "logs",
 }
+
 
 
 var UserCollection *mongo.Collection
