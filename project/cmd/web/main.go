@@ -7,6 +7,7 @@ import (
 	"log"
 	"log/slog"
 	"net/http"
+	"GoBaby/cmd/web/domain/repository/db_config"
 )
 
 func InitRoutes() {

@@ -11,7 +11,7 @@ func InitializeDb() (*mongo.Client, *models.AppError) {
 	return db_config.InitializeDb()
 }
 
-func GerUserByUUID(uuid string) (*models.User, *models.AppError) {
+func GerUserByUUID(uuid int) (*models.User, *models.AppError) {
 	return repository_adapters.GetUserByUUID(uuid)
 }
 
