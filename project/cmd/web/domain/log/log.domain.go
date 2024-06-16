@@ -46,6 +46,5 @@ func SaveLog(countdown int) *models.AppError {
 	primitiveDate := primitive.NewDateTimeFromTime(currentTime)
 	err := repository_domain.AddLogByUUID(uuid, models.Log{Date: primitiveDate, Duration: countdown})
 		
-	
 	return err
 }
