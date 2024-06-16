@@ -29,3 +29,4 @@ const (
 	ErrMethodNotAllowed = http.StatusMethodNotAllowed
 	ErrConflict = http.StatusConflict
 )
+

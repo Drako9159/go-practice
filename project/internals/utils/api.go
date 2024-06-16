@@ -27,5 +27,3 @@ var (
 	EmptyFuncMap = template.FuncMap{}
 	EmptyStruct = struct{}{}
 )
-
-
