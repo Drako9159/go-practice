@@ -9,6 +9,7 @@ import (
 func LogRender() {
 
 	mux.HandleFunc("GET "+models.RoutesInstance.LOGS, logDomain.LogView)
+	mux.HandleFunc("GET "+models.RoutesInstance.LOG_TABLE, logDomain.LogTable)
 	
 }
 
