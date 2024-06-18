@@ -25,7 +25,7 @@ func SetDuration(duration int) {
 
 func FormatCountdownToTimestamp(countdown string) int {
 	parts := strings.Split(countdown, ":")
-	if len(parts) >= 3 {
+	if len(parts) != 3 {
 		return 0
 	}
 	hours, err := strconv.Atoi(parts[0])

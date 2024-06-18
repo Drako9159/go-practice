@@ -35,9 +35,9 @@ func InitializeDb() (*mongo.Client, *models.AppError) {
 		}
 	}
 
-	UsersCollection := InitializeUsersCollection(client)
+	UserCollection = InitializeUsersCollection(client)
 
-	result := UsersCollection.FindOne(context.TODO(), bson.M{"_id": 0})
+	result := UserCollection.FindOne(context.TODO(), bson.M{"_id": 0})
 	if err := result.Err(); err != nil {
 		if err == mongo.ErrNoDocuments {
 			user := models.User{
@@ -46,9 +46,8 @@ func InitializeDb() (*mongo.Client, *models.AppError) {
 				Id:       0,
 			}
 
-			_, error := UsersCollection.InsertOne(context.TODO(), user)
-
-			if error != nil {
+			_, err := UserCollection.InsertOne(context.TODO(), user)
+			if err != nil {
 				return nil, &models.AppError{
 					Message: "Error inserting user",
 					Err:     err,

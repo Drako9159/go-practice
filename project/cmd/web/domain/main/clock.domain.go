@@ -42,6 +42,7 @@ func RestartCycle(w http.ResponseWriter, r *http.Request) {
 			utils.StopCountdown(clockInstance)
 			clockInstance.CountDown = "04:00:00"
 			utils.SetDuration(duration)
+			
 			go utils.StartCountdown(clockInstance, duration)
 
 			w.Write([]byte("Cycle restarted"))
