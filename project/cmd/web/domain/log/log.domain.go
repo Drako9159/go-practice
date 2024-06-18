@@ -21,7 +21,7 @@ func LogView(w http.ResponseWriter, r *http.Request) {
 	
 	files := []string{
 		"html/base.html",
-		"html/pages/log/log.tmpl.html",
+		"html/pages/logs/log.tmpl.html",
 	}
 
 	utils.ParseTemplateFiles(w, "base", utils.EmptyStruct, utils.EmptyFuncMap, ui.Content, files...)

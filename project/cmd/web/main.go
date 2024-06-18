@@ -8,9 +8,11 @@ import (
 	"log/slog"
 	"net/http"
 	"GoBaby/cmd/web/domain/repository/config"
+	"fmt"
 )
 
 func InitRoutes() {
+	routes.LogRender()
 	mainRoute.MainRender()
 	mainRoute.ClockRender()
 }
@@ -18,12 +20,14 @@ func InitRoutes() {
 func InitDb(){
 	_, initDbError := db_config.InitializeDb()
 	if initDbError != nil {
-		slog.Log(context.TODO(), slog.LevelError, initDbError.String())
+		// slog.Log(context.TODO(), slog.LevelError, initDbError.String())
+		slog.Error(fmt.Sprint(initDbError))
 	}
 }
 
 func main() {
 	InitRoutes()
+	InitDb()
 
 	mux := routes.GetMuxInstance()
 	fileServer := routes.GetFileServerInstance()
