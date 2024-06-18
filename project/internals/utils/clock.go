@@ -76,6 +76,9 @@ func StartCountdown(clock *Clock, duration int){
     
 	ticker := time.NewTicker(1 * time.Second)
 
+	defer ticker.Stop()
+	clock.Stop = make(chan struct{})
+
 	for range ticker.C {
 		clock.CountDown = FormatDuration(currentDuration)
 		currentDuration--
