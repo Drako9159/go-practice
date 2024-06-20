@@ -24,11 +24,11 @@ func InitializeUsersCollection(client *mongo.Client) *mongo.Collection {
 }
 
 
-func InitializeDb() (*mongo.Client, *models.AppError) {
+func InitializeDb() (*models.AppError) {
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
 	
 	if err != nil {
-		return nil, &models.AppError{
+		return &models.AppError{
 			Message: "Error connecting to database",
 			Err:     err,
 			Code:    500,
@@ -48,14 +48,14 @@ func InitializeDb() (*mongo.Client, *models.AppError) {
 
 			_, err := UserCollection.InsertOne(context.TODO(), user)
 			if err != nil {
-				return nil, &models.AppError{
+				return &models.AppError{
 					Message: "Error inserting user",
 					Err:     err,
 					Code:    500,
 				}
 			}
 		} else {
-			return nil, &models.AppError{
+			return &models.AppError{
 				Message: "Error querying user",
 				Err:     err,
 				Code:    500,
@@ -66,7 +66,7 @@ func InitializeDb() (*mongo.Client, *models.AppError) {
 	}
 
 	slog.Info("Database initialized")
-	return client, nil	
+	return nil	
 }
 
 

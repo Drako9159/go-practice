@@ -7,8 +7,12 @@ import (
 	repository_adapters "GoBaby/cmd/web/domain/repository/adapters"
 )
 
-func InitializeDb() (*mongo.Client, *models.AppError) {
-	return db_config.InitializeDb()
+func InitializeDb() {
+	err := db_config.InitializeDb()
+	if err != nil {
+		slog.Error(err.Message)
+		panic(err.Error) // we want it to panic as it's a critical error
+	}
 }
 
 func GetUserByUUID(uuid int) (models.User, *models.AppError) {
