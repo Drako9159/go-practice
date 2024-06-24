@@ -24,7 +24,7 @@ func InitializeUsersCollection(client *mongo.Client) *mongo.Collection {
 }
 
 
-func InitializeDb() (*models.AppError) {
+func InitializeDb() *models.AppError {
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
 	
 	if err != nil {

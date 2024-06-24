@@ -3,8 +3,9 @@ package repository_domain
 import (
 	"GoBaby/internals/models"
 	db_config "GoBaby/cmd/web/domain/repository/config"
-	"go.mongodb.org/mongo-driver/mongo"
 	repository_adapters "GoBaby/cmd/web/domain/repository/adapters"
+	"log/slog"
+	
 )
 
 func InitializeDb() {

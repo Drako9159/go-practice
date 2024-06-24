@@ -17,17 +17,9 @@ func InitRoutes() {
 	mainRoute.ClockRender()
 }
 
-func InitDb(){
-	_, initDbError := db_config.InitializeDb()
-	if initDbError != nil {
-		// slog.Log(context.TODO(), slog.LevelError, initDbError.String())
-		slog.Error(fmt.Sprint(initDbError))
-	}
-}
-
 func main() {
 	InitRoutes()
-	InitDb()
+	repository_domain.InitializeDb()
 
 	mux := routes.GetMuxInstance()
 	fileServer := routes.GetFileServerInstance()
