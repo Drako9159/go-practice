@@ -3,8 +3,6 @@ package models
 import (
 	"fmt"
 	"net/http"
-
-
 )
 
 type AppError struct {
