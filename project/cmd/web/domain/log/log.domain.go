@@ -5,11 +5,10 @@ import (
 	"GoBaby/internals/utils"
 	"net/http"
 	"GoBaby/ui"
-	"context"
 	"time"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	repository_domain "GoBaby/cmd/web/domain/repository"
-	"log/slog"
+	errorDomain "GoBaby/cmd/web/domain/error"
 )
 
 type LogViewModel struct {
@@ -32,7 +31,7 @@ func LogTable(w http.ResponseWriter, r *http.Request) {
 
 	users, err := repository_domain.GetUserByUUID(0) 
 	if err != nil {
-		slog.Log(context.TODO(), slog.LevelError, err.Message)
+		errorDomain.ErrorTemplate(w, r, err)
 		return
 	}
 

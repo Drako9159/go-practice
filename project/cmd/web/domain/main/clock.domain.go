@@ -6,8 +6,7 @@ import (
 	"GoBaby/internals/utils"
 	"GoBaby/ui"
 	"GoBaby/cmd/web/domain/log"
-	"context"
-	"log/slog"
+	"GoBaby/cmd/web/domain/error"
 )
 
 var duration = 14400
@@ -35,7 +34,7 @@ func RestartCycle(w http.ResponseWriter, r *http.Request) {
 			// save a log inside the database
 			err := logDomain.SaveLog(utils.FormatCountdownToTimestamp(clockInstance.CountDown))
 			if err != nil {
-				slog.Log(context.TODO(), slog.LevelError, err.Message)
+				errorDomain.ErrorTemplate(w, r, err)
 				return
 			}
 			

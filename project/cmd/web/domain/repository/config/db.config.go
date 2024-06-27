@@ -12,17 +12,23 @@ import (
 var dataBase = "GoBaby"
 var collections = map[string]string{
 	"users": "users",
-	"logs": "logs",
+	"monitor": "monitor",
 }
 
 
 
-var UserCollection *mongo.Collection
+var (
+	UserCollection *mongo.Collection
+	MonitorCollection *mongo.Collection
+)
 
 func InitializeUsersCollection(client *mongo.Client) *mongo.Collection {
 	return client.Database(dataBase).Collection(collections["users"])
 }
 
+func InitializeMonitorCollection(client *mongo.Client) *mongo.Collection {
+	return client.Database(dataBase).Collection(collections["monitor"])
+}
 
 func InitializeDb() *models.AppError {
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
@@ -36,6 +42,7 @@ func InitializeDb() *models.AppError {
 	}
 
 	UserCollection = InitializeUsersCollection(client)
+	MonitorCollection = InitializeMonitorCollection(client)
 
 	result := UserCollection.FindOne(context.TODO(), bson.M{"_id": 0})
 	if err := result.Err(); err != nil {

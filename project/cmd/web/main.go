@@ -7,19 +7,20 @@ import (
 	"log"
 	"log/slog"
 	"net/http"
-	"GoBaby/cmd/web/domain/repository/config"
-	"fmt"
+	repository_domain "GoBaby/cmd/web/domain/repository"
+	
 )
 
 func InitRoutes() {
 	routes.LogRender()
+	routes.ErrorRender()
 	mainRoute.MainRender()
 	mainRoute.ClockRender()
 }
 
 func main() {
 	InitRoutes()
-	repository_domain.InitializeDb()
+	repository_domain.InitializeDB()
 
 	mux := routes.GetMuxInstance()
 	fileServer := routes.GetFileServerInstance()

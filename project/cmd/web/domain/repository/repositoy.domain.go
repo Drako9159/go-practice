@@ -5,14 +5,13 @@ import (
 	db_config "GoBaby/cmd/web/domain/repository/config"
 	repository_adapters "GoBaby/cmd/web/domain/repository/adapters"
 	"log/slog"
-	
 )
 
-func InitializeDb() {
+func InitializeDB(){
 	err := db_config.InitializeDb()
 	if err != nil {
 		slog.Error(err.Message)
-		panic(err.Error) // we want it to panic as it's a critical error
+		panic(err.Err) // we want it to panic as it's a critical error
 	}
 }
 
@@ -26,4 +25,11 @@ func SetUser(user *models.User) *models.AppError {
 
 func AddLogByUUID(uuid int, log models.Log) *models.AppError {
 	return repository_adapters.AddLogByUUID(uuid, log)
+}
+
+func AddMonitorLog(monitorLog models.MonitorLog) {
+	err := repository_adapters.AddMonitorLog(monitorLog)
+	if err != nil {
+		slog.Error(err.Message)
+	}
 }

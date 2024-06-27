@@ -19,7 +19,7 @@ func GetUserByUUID(uuid int) (models.User, *models.AppError) {
 	}
 	var result models.User
 	var error *models.AppError
-	
+
 	err := db_config.UserCollection.FindOne(context.TODO(), filter).Decode(&result)
 
 	if err != nil {
@@ -49,22 +49,21 @@ func SetUser(user *models.User) *models.AppError {
 
 func AddLogByUUID(uuid int, log models.Log) *models.AppError {
 	//_, error := db_config.UserCollection.UpdateOne(context.TODO(), bson.D{{Key: "_id", Value: uuid}}, bson.D{{Key: "$push", Value: bson.D{{Key: "logs", Value: log}}}})
-
 	filter := bson.M{"_id": uuid}
 
 	update := bson.M{
-		"$push": bson.M{
-			"logs": log,
+	 	"$push": bson.M{
+	 		"logs": log,
 		},
 	}
 
 	_, err := db_config.UserCollection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
-		return &models.AppError{
-			Message: "Error inserting log",
-			Err:     err,
-			Code:    500,
-		}
+	 	return &models.AppError{
+	 		Message: "Error inserting log",
+	 		Err:     err,
+	 		Code:    500,
+	 	}
 	}
 
 	return nil
